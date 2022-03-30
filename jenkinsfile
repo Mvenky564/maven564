@@ -3,43 +3,19 @@ pipeline
     agent any
     stages
     {
-        stage('ContinuousDownload_Master')
+        stage('ContinuousDownload_Loans')
         {
             steps
             {
 	       https://github.com/Mvenky564/maven564.git
             }
         }
-        stage('ContinuousBuild_Master')
+        stage('ContinuousBuild_Loans')
         {
             steps
             {
                 sh 'mvn package'
             }
         }
-        stage('ContinuousDeployment_Master')
-        {
-            steps
-            {
-                sh 'scp /var/lib/jenkins/workspace/Declarativepipeline/webapp/target/webapp.war cloud_user@172.31.108.23:/var/lib/tomcat9/webapps/testapp.war'
-            }
-        }
-        stage('ContinuousTesting_Master')
-        {
-            steps
-            {
-                git 'https://github.com/intelliqittrainings/FunctionalTesting.git'
-                sh 'java -jar /var/lib/jenkins/workspace/Declarativepipeline/testing.jar'
-            }
-        }
-        stage('ContinuousDelivery_Master')
-        {
-            steps
-            {
-                input message: 'Waiting for Approval', submitter: 'Venky'
-                sh 'scp /var/lib/jenkins/workspace/Declarativepipeline/webapp/target/webapp.war cloud_user@172.31.99.38:/var/lib/tomcat9/webapps/prodapp.war'
-            }
-        }
     }
 }
-
