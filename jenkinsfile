@@ -7,7 +7,7 @@ pipeline
         {
             steps
             {
-	       https://github.com/Mvenky564/maven564.git
+	       git 'https://github.com/Mvenky564/maven564.git'
             }
         }
         stage('ContinuousBuild_Master')
